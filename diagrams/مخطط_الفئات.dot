@@ -1,0 +1,49 @@
+digraph UML {
+  graph [rankdir=TB, splines=polyline, nodesep=0.55, ranksep=0.7, bgcolor="white", pad=0.35, fontname="Noto Naskh Arabic"];
+  node [shape=plain, fontname="Noto Naskh Arabic", fontsize=18];
+  edge [fontname="Noto Naskh Arabic", fontsize=15, color="#475569", arrowsize=0.95];
+
+  interface [label=<
+    <TABLE BORDER="2" CELLBORDER="0" CELLSPACING="0" CELLPADDING="12" COLOR="#0F766E">
+      <TR><TD BGCOLOR="#CCFBF1"><FONT POINT-SIZE="17"><B>«واجهة»</B></FONT><BR/><FONT POINT-SIZE="21"><B>Iعمليات_الجهاز</B></FONT></TD></TR>
+      <TR><TD ALIGN="RIGHT"><FONT POINT-SIZE="16">+ الرقم_التسلسلي<BR ALIGN="RIGHT"/>+ نوع_الجهاز<BR ALIGN="RIGHT"/>+ الحالة</FONT></TD></TR>
+      <TR><TD ALIGN="RIGHT"><FONT POINT-SIZE="16">+ حساب_تكلفة_الإصلاح()<BR ALIGN="RIGHT"/>+ تحديث_الحالة()<BR ALIGN="RIGHT"/>+ عرض_البيانات()</FONT></TD></TR>
+    </TABLE>
+  >];
+
+  base [label=<
+    <TABLE BORDER="2" CELLBORDER="0" CELLSPACING="0" CELLPADDING="12" COLOR="#1D4ED8">
+      <TR><TD BGCOLOR="#DBEAFE"><FONT POINT-SIZE="17"><B>«صنف مجرد»</B></FONT><BR/><FONT POINT-SIZE="21"><B>جهاز_منزلي</B></FONT></TD></TR>
+      <TR><TD ALIGN="RIGHT"><FONT POINT-SIZE="16">- الرقم_التسلسلي<BR ALIGN="RIGHT"/>- بيانات العميل والعطل<BR ALIGN="RIGHT"/>- الحالة والتكاليف والمواعيد</FONT></TD></TR>
+      <TR><TD ALIGN="RIGHT"><FONT POINT-SIZE="16">+ حدث_الصيانة<BR ALIGN="RIGHT"/>+ حساب_تكلفة_الإصلاح() «مجردة»<BR ALIGN="RIGHT"/>+ تحديث_الحالة()<BR ALIGN="RIGHT"/>+ عرض_البيانات()</FONT></TD></TR>
+    </TABLE>
+  >];
+
+  fridge [label=<
+    <TABLE BORDER="2" CELLBORDER="0" CELLSPACING="0" CELLPADDING="11" COLOR="#64748B">
+      <TR><TD BGCOLOR="#F1F5F9"><FONT POINT-SIZE="20"><B>ثلاجة</B></FONT></TD></TR>
+      <TR><TD ALIGN="RIGHT"><FONT POINT-SIZE="16">- تكلفة_نظام_التبريد</FONT></TD></TR>
+      <TR><TD ALIGN="RIGHT"><FONT POINT-SIZE="16">+ حساب_تكلفة_الإصلاح() «Override»</FONT></TD></TR>
+    </TABLE>
+  >];
+  washer [label=<
+    <TABLE BORDER="2" CELLBORDER="0" CELLSPACING="0" CELLPADDING="11" COLOR="#64748B">
+      <TR><TD BGCOLOR="#F1F5F9"><FONT POINT-SIZE="20"><B>غسالة</B></FONT></TD></TR>
+      <TR><TD ALIGN="RIGHT"><FONT POINT-SIZE="16">- تكلفة_المحرك</FONT></TD></TR>
+      <TR><TD ALIGN="RIGHT"><FONT POINT-SIZE="16">+ حساب_تكلفة_الإصلاح() «Override»</FONT></TD></TR>
+    </TABLE>
+  >];
+  ac [label=<
+    <TABLE BORDER="2" CELLBORDER="0" CELLSPACING="0" CELLPADDING="11" COLOR="#64748B">
+      <TR><TD BGCOLOR="#F1F5F9"><FONT POINT-SIZE="20"><B>مكيف</B></FONT></TD></TR>
+      <TR><TD ALIGN="RIGHT"><FONT POINT-SIZE="16">- تكلفة_غاز_التبريد</FONT></TD></TR>
+      <TR><TD ALIGN="RIGHT"><FONT POINT-SIZE="16">+ حساب_تكلفة_الإصلاح() «Override»</FONT></TD></TR>
+    </TABLE>
+  >];
+
+  interface -> base [style=dashed, arrowhead=empty, label="تطبيق الواجهة"];
+  base -> fridge [arrowhead=empty, label="وراثة"];
+  base -> washer [arrowhead=empty, label="وراثة"];
+  base -> ac [arrowhead=empty, label="وراثة"];
+  {rank=same; fridge; washer; ac;}
+}
